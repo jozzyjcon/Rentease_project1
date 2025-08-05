@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
+
+env:
+  TARGET_URL: 'http://13.218.24.66' # Replace with your domain
 
 jobs:
   deploy:
@@ -46,3 +53,22 @@ jobs:
 
           # Reload nginx
           sudo systemctl reload nginx
+    
+    - name: Set Timestamp variable
+      run: echo "Timestamp=$(date +%Y-%m-%d_%H-%M-%S)" >> $GITHUB_ENV
+   
+    - name: Run OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.10.0  # pinned stable version
+      with:
+        target: ${{ env.TARGET_URL }}
+        fail_action: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifact_name: zap_report_${{ env.TIMESTAMP }}
+        cmd_options: '-a'
+
+    - name: Upload ZAP Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: zap_report_${{ env.TIMESTAMP }}
+        path: report_html.html
+  
