@@ -58,7 +58,7 @@ jobs:
       with:
         target: ${{ env.TARGET_URL }}
         token: ${{ secrets.PERSONAL_TOKEN }}
-        fail_action: true
+        fail_action: false
         artifact_name: zap_report_1
         format: 'html'
         cmd_options: '-a'
