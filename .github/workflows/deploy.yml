@@ -57,7 +57,7 @@ jobs:
       uses: zaproxy/action-baseline@v0.10.0  # pinned stable version
       with:
         target: ${{ env.TARGET_URL }}
-        token: ${{ secrets.ZAP_PAT }}
+        token: ${{ secrets.PERSONAL_TOKEN }}
         fail_action: true
         artifact_name: zap_report_1
         format: 'html'
