@@ -61,8 +61,8 @@ jobs:
       uses: zaproxy/action-baseline@v0.10.0  # pinned stable version
       with:
         target: ${{ env.TARGET_URL }}
-        fail_action: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ZAP_PAT }}
+        fail_action: true;
         artifact_name: zap_report_${{ env.TIMESTAMP }}
         cmd_options: '-a'
 
