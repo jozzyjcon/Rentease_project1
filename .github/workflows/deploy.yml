@@ -59,11 +59,12 @@ jobs:
         target: ${{ env.TARGET_URL }}
         token: ${{ secrets.ZAP_PAT }}
         fail_action: true
-        artifact_name: zap_report
+        artifact_name: zap_report_1
+        format: 'html'
         cmd_options: '-a'
 
     - name: Upload ZAP Report
       uses: actions/upload-artifact@v4
       with:
-        name: zap_report
+        name: zap_report_1
         path: report_html.html
